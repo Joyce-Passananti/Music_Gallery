@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title> Music Gallery </title>
+    <meta name="author" content="Joyce">
+    <meta name="description" content="Music Gallery">
+
+    <script src="waveCanvas.js"></script>
+    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="controls.js"></script>
+  </head>
+  <body>
+    
+    <section></section>
+    <a-scene>
+      <a-sky id='sky' src="assets/music_sky3.jpg"></a-sky>
+      <!-- <a-plane id='random' height='5' width='5' position='0 0 -2' visible=false></a-plane> -->
+      <a-assets>
+        <img id="background" src="assets/music_sky.jpg">
+        <img id="pic1" src="assets/music_sky.jpg">
+        <img id="pic2" src="assets/music_sky.jpg">
+        <img id="pic3" src="assets/music_sky.jpg">
+        <img id="pic4" src="assets/music_sky.jpg">
+        <img id="pic5" src="assets/music_sky.jpg">
+
+        <a-asset-item id="piano-gltf" src="models/model.gltf"></a-asset-item>
+        <audio
+          id="hover-sound"
+          src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
+        ></audio>
+        <audio
+          id="elvis-sound"
+          src="music/elvis_audio.mp3"
+        ></audio>
+        <audio
+          id="sinatra-sound"
+          src="music/sinatra_audio.mp3"
+        ></audio>
+        <audio
+          id="queen-sound"
+          src="music/queen_audio.mp3"
+        ></audio>
+        <audio
+          id="zimmer-sound"
+          src="music/zimmer_audio.mp3"
+        ></audio>
+        <audio
+          id="bruno-sound"
+          src="music/bruno_audio.mp3"
+        ></audio>
+
+        <img src="assets/Bruno_cover.jpeg" id="brunocover">
+        <img src="assets/bruno_cartoon.jpeg" id="bruno">
+        <img src="assets/bruno2.jpeg" id="bruno2">
+        <img src="assets/bruno3.jpeg" id="bruno3">
+        <img src="assets/bruno4.jpeg" id="bruno4">
+        <img src="assets/bruno5.jpeg" id="bruno5">        
+
+        <img src="assets/elvis_cover.jpeg" id="elviscover">
+        <img src="assets/elvis.jpeg" id="elvis">
+        <img src="assets/elvis2.jpeg" id="elvis2">
+        <img src="assets/elvis3.jpeg" id="elvis3">
+        <img src="assets/elvis4.png" id="elvis4">
+        <img src="assets/elvis5.jpeg" id="elvis5">
+
+        <img src="assets/sinatra_cover.jpeg" id="sinatracover">
+        <img src="assets/sinatra.jpeg" id="sinatra">
+        <img src="assets/sinatra2.jpeg" id="sinatra2">
+        <img src="assets/sinatra3.jpeg" id="sinatra3">
+        <img src="assets/sinatra4.jpeg" id="sinatra4">
+        <img src="assets/sinatra5.jpeg" id="sinatra5">
+        
+        <img src="assets/queen_cover.jpeg" id="queencover">        
+        <img src="assets/queen.jpeg" id="queen">
+        <img src="assets/queen2.jpeg" id="queen2">
+        <img src="assets/queen3.jpeg" id="queen3">
+        <img src="assets/queen4.jpeg" id="queen4">
+        <img src="assets/queen5.jpeg" id="queen5">        
+
+        <img src="assets/zimmer_cover.jpeg" id="zimmercover">        
+        <img src="assets/zimmer.jpeg" id="zimmer">
+        <img src="assets/zimmer2.jpeg" id="zimmer2">
+        <img src="assets/zimmer3.jpeg" id="zimmer3">
+        <img src="assets/zimmer4.jpeg" id="zimmer4">        
+        <img src="assets/zimmer5.jpeg" id="zimmer5">                
+      </a-assets>
+    
+      <!-- background artist picture -->
+      <a-image id="bg" src="#background" width="3" height="3" position="0 8 -35" scale="5 5 1" visible=false ></a-image>
+
+      <!-- moving artist picture animations -->
+      <a-image id="p1" src="#pic1" width="3" height="3" scale="2 2 1" visible=false 
+        animation="property: position;
+        from: -7 3 -30;
+        to: -7 3 60;
+        dur: 18000;
+        easing: linear;
+        autoplay: true;
+        loop: true;">
+      </a-image>
+      <a-image id="p2" src="#pic2" width="3" height="3" scale="2 2 1" visible=false 
+        animation="property: position;
+        from: 7 3 -30;
+        to: 7 3 50;
+        dur: 10000;
+        easing: linear;
+        autoplay: true;
+        loop: true;">
+      </a-image>
+      <a-image id="p3" src="#pic3" width="3" height="3" scale="2 2 1" visible=false 
+        animation="property: position;
+        from: -7 3 -50;
+        to: -7 3 40;
+        dur: 18000;
+        easing: linear;
+        autoplay: true;
+        loop: true;">
+      </a-image>
+      <a-image id="p4" src="#pic4" width="3" height="3" scale="2 2 1" visible=false 
+        animation="property: position;
+        from: 7 3 -60;
+        to: 7 3 20;
+        dur: 10000;
+        easing: linear;
+        autoplay: true;
+        loop: true;">
+      </a-image>
+      <a-image id="p5" src="#pic5" width="3" height="3" scale="2 2 1" visible=false 
+        animation="property: position;
+        from: -7 3 -70;
+        to: -7 3 20;
+        dur: 18000;
+        easing: linear;
+        autoplay: true;
+        loop: true;">
+      </a-image>
+        
+
+      <!-- keyboard model animation -->
+      <a-entity id="model" visible=false
+        animation="property: position;
+        to: 0 0 20;
+        dur: 3000;
+        easing: linear;
+        loop: true;">
+        <a-entity id="piano" gltf-model="#piano-gltf" scale="50 50 50" position="-19 -100 0" rotation="0 90 0"></a-entity>
+        <a-entity id="piano" gltf-model="#piano-gltf" scale="50 50 50" position="-19 -100 -80" rotation="0 90 0"></a-entity>
+        <a-entity id="piano" gltf-model="#piano-gltf" scale="50 50 50" position="-19 -100 -160" rotation="0 90 0"></a-entity>
+      </a-entity>
+
+      <a-entity id="Pianomodel" visible=false position= '0 -80 0'>
+        <a-entity id="piano" gltf-model="#piano-gltf" scale="50 50 50" position="-12 -80 -95" rotation="25 0 0"></a-entity>
+        <a-plane class='key' synth="note: E4" width = '16' height = '2.3' position="-0.95 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: D4" width = '16' height = '2.3' position="-3.95 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: C4" width = '16' height = '2.3' position="-6.90 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: B3" width = '16' height = '2.3' position="-9.85 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: A3" width = '16' height = '2.3' position="-12.80 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: G3" width = '16' height = '2.3' position="-15.75 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: F3" width = '16' height = '2.3' position="-18.70 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: E3" width = '16' height = '2.3' position="-21.65 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: D3" width = '16' height = '2.3' position="-24.55 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: C3" width = '16' height = '2.3' position="-27.50 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: B2" width = '16' height = '2.3' position="-30.45 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: A2" width = '16' height = '2.3' position="-33.35 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: G2" width = '16' height = '2.3' position="-36.25 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: F2" width = '16' height = '2.3' position="-39.15 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: F4" width = '16' height = '2.3' position="1.95 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: G4" width = '16' height = '2.3' position="4.95 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: A4" width = '16' height = '2.3' position="7.90 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: B4" width = '16' height = '2.3' position="10.85 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: C5" width = '16' height = '2.3' position="13.80 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: D5" width = '16' height = '2.3' position="16.75 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: E5" width = '16' height = '2.3' position="19.70 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: F5" width = '16' height = '2.3' position="22.65 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: G5" width = '16' height = '2.3' position="25.60 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: A5" width = '16' height = '2.3' position="28.55 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: B5" width = '16' height = '2.3' position="31.45 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: C6" width = '16' height = '2.3' position="34.35 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: D6" width = '16' height = '2.3' position="37.25 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+        <a-plane class='key' synth="note: E6" width = '16' height = '2.3' position="40.15 0 -36" rotation="-65 0 90" visible=false opacity='.35' color="#7D7098"></a-plane>
+      </a-entity>
+
+      <!-- music to play on selection -->
+      <a-sound id="play" src="#queen-sound"></a-sound>
+
+      <a-plane id="CreateSong" color="purple" height="0.45" width='2' position="0 6 -2" visible = 'false'
+        create-interact sound="on: mouseenter; src: #hover-sound">
+        <a-entity id="CreateSong" mixin="font"
+          text="value: Create a New Song!; color: white; align: center; width: 1.2; wrapCount: 12; opacity: 1"
+          position="0 0 0.01"
+        ></a-entity>
+      </a-plane>
+
+      <a-plane id="instructions" color="purple" width='3' height="1.2" position="0 4.8 -2" visible = 'false'>
+      <a-entity id="instructions" mixin="font"
+        text="value: INSTRUCTIONS:           Hover over a key to hear the note, click to add it to your melody! 
+        Click 'Play' when done, and 'New song' to start over!; 
+        color: white; align: center; width: 1.7; wrapCount: 22; opacity: 1"
+        position="0 0 0.01"
+      ></a-entity>
+    </a-plane>
+      
+      <a-plane id="PlaySong" color="purple" height="0.55" position="0 .4 -2" visible = 'false'
+        play-interact sound="on: mouseenter; src: #hover-sound">
+        <a-entity id="PlaySong" mixin="font"
+          text="value: PLAY; color: white; align: center; width: 1.2; wrapCount: 12; opacity: 1"
+          position="0 0 0.01"
+        ></a-entity>
+      </a-plane>
+      
+      <a-plane id="menu0" color="white" width="4" height="3.8"
+        visible=true position="0 3 -3" >
+
+        <a-plane id="song0" color="teal" width="3.9" height="0.7" position="0 0.75 0.01" 
+        song-interact="track: #elviscover; track1: #elvis; track2: #elvis2; track3: #elvis3; track4: #elvis4; track5: #elvis5; tracksound: #elvis-sound"  >
+          <a-image src="#elviscover" scale="0.6 0.6 0.6" position="-1.5 0 0.01"></a-image>
+          
+          <a-entity position= "1.5 0.1 0" 
+                    text="value: Uptown Funk; width: 5"></a-entity>
+          <a-entity position= "0.52 -0.1 0"
+                    text="value: Elvis Presley; width: 3"></a-entity>
+
+        </a-plane>
+
+        <a-plane id="song1" color="teal" width="3.9" height="0.7" position="0 0.0 0.01" 
+        song-interact="track: #sinatracover; track1: #sinatra; track2: #sinatra2; track3: #sinatra3; track4: #sinatra4; track5: #sinatra5; tracksound: #sinatra-sound"  >
+          <a-image src="#sinatracover" scale="0.6 0.6 0.6" position="-1.5 0 0.01"></a-image>
+          
+          <a-entity position= "1.5 0.1 0" 
+          text="value: This is America; width: 5"></a-entity>
+          <a-entity position= "0.52 -0.1 0"
+                  text="value: Frank Sinatra; width: 3"></a-entity>
+
+        </a-plane>
+
+        <a-plane id="song2" color="teal" width="3.9" height="0.7" position="0 -0.75 0.01" 
+        song-interact="track: #brunocover; track1: #bruno; track2: #bruno2; track3: #bruno3; track4: #bruno4; track5: #bruno5; tracksound: #elvis-sound" >
+          <a-image src="#brunocover" scale="0.6 0.6 0.6" position="-1.5 0 0.01"></a-image>
+        
+          <a-entity position= "1.5 0.1 0" 
+          text="value: Never Gonna Give You Up; width: 5"></a-entity>
+          <a-entity position= "0.52 -0.1 0"
+                  text="value: Bruno Mars; width: 3"></a-entity>
+        
+        </a-plane>
+
+        <a-plane id="song3" color="teal" width="3.9" height="0.7" position="0 1.5 0.01">
+        
+          <a-entity position= "1.2 0.1 0" 
+          text="value: Jukebox Generated Songs: ; width: 5"></a-entity>
+          <a-entity position= "0.82 -0.1 0"
+                  text="value: (Song, Artist Style); width: 3"></a-entity>
+        
+        </a-plane>
+
+        <a-plane id="song4" color="teal" width="3.9" height="0.7" position="0 -1.5 0.01" 
+        song-interact="track: #zimmercover; track1: #zimmer; track2: #zimmer2; track3: #zimmer3; track4: #zimmer4; track5: #zimmer5; tracksound: #zimmer-sound" >
+          <a-image src="#zimmercover" scale="0.6 0.6 0.6" position="-1.5 0 0.01"></a-image>
+        
+          <a-entity position= "1.5 0.1 0" 
+          text="value: Film Score; width: 5"></a-entity>
+          <a-entity position= "0.52 -0.1 0"
+                  text="value: Hans Zimmer; width: 3"></a-entity>
+        
+        </a-plane>
+      </a-plane>
+
+      <a-plane id="menu1" color="white" width="3" height="3.8"
+      visible=true position="4 3 -2" rotation="0 -30 0" sound="">
+        <a-plane id="container" color="teal" width="2.9" height="3.7"
+        position="0 0 0.01" rotation="0 0 0"
+        random-interact = ""
+        text="width: 6; height: auto; color: white; align: center; value: Generate a \n random song!">
+        </a-plane>
+      </a-plane>
+
+      <a-plane id="menu2" color="white" width="3" height="3.8"
+      visible=true position="-4 3 -2" rotation="0 30 0" sound="">
+        <a-plane id="container1" color="teal" width="2.9" height="3.7"
+        position="0 0 0.01" rotation="0 0 0"
+        piano-interact = ""
+        text="width: 6; height: 4; color: white; align: center; value: Create your own song! \n \n on a \n~virtual keyboard~
+          ">
+        </a-plane>
+      </a-plane>
+
+      <a-camera position="0 3.5 3" cursor="rayOrigin: mouse"></a-camera>
+    
+
+    </a-scene>
+
+  </body>
+</html>
